@@ -21,6 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
   final AuthService authService = AuthService();
+  bool isLoading = false;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -40,6 +41,9 @@ class _AuthScreenState extends State<AuthScreen> {
         name: _nameController.text,
         email: _emailController.text,
         password: _passwordController.text);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void signInUser() {
@@ -47,230 +51,252 @@ class _AuthScreenState extends State<AuthScreen> {
         context: context,
         email: _emailController.text,
         password: _passwordController.text);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalVariables.greyBackgroundColor,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Image.asset(
-                  'assets/images/amazon_in.png',
-                  height: 40,
-                  width: 50,
-                ),
-                const SizedBox.square(
-                  dimension: 12,
-                ),
-                const Text(
-                  'Welcome',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-                ),
-                const SizedBox.square(
-                  dimension: 12,
-                ),
-
-                // Sign Up Section
-                Container(
-                  padding: const EdgeInsets.only(bottom: 10, right: 8, left: 8),
-                  decoration: BoxDecoration(
-                    color: _auth == Auth.signUp
-                        ? GlobalVariables.backgroundColor
-                        : GlobalVariables.greyBackgroundColor,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
+      body: isLoading
+          ? SizedBox(
+              height: MediaQuery.sizeOf(context).height,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      ListTile(
-                        minLeadingWidth: 2,
-                        leading: SizedBox.square(
-                          dimension: 12,
-                          child: Radio(
-                              value: Auth.signUp,
-                              groupValue: _auth,
-                              onChanged: (Auth? val) {
-                                setState(() {
-                                  _auth = val!;
-                                });
-                              }),
-                        ),
-                        title: RichText(
-                          text: const TextSpan(children: [
-                            TextSpan(
-                              text: 'Create account. ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.black),
-                            ),
-                            TextSpan(
-                              text: 'New to Amazon?',
-                              style: TextStyle(
-                                  fontSize: 13, color: Colors.black87),
-                            )
-                          ]),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _auth = Auth.signUp;
-                          });
-                        },
+                      Image.asset(
+                        'assets/images/amazon_in.png',
+                        height: 40,
+                        width: 50,
                       ),
-                      if (_auth == Auth.signUp)
-                        Form(
-                          key: _signUpFormKey,
-                          child: Column(
-                            children: [
-                              CustomTextfield(
-                                controller: _nameController,
-                                hintText: 'First and last name',
+                      const SizedBox.square(
+                        dimension: 12,
+                      ),
+                      const Text(
+                        'Welcome',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox.square(
+                        dimension: 12,
+                      ),
+
+                      // Sign Up Section
+                      Container(
+                        padding: const EdgeInsets.only(
+                            bottom: 10, right: 8, left: 8),
+                        decoration: BoxDecoration(
+                          color: _auth == Auth.signUp
+                              ? GlobalVariables.backgroundColor
+                              : GlobalVariables.greyBackgroundColor,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              minLeadingWidth: 2,
+                              leading: SizedBox.square(
+                                dimension: 12,
+                                child: Radio(
+                                    value: Auth.signUp,
+                                    groupValue: _auth,
+                                    onChanged: (Auth? val) {
+                                      setState(() {
+                                        _auth = val!;
+                                      });
+                                    }),
                               ),
-                              CustomTextfield(
-                                controller: _emailController,
-                                hintText: 'Email',
-                              ),
-                              CustomTextfield(
-                                controller: _passwordController,
-                                hintText: 'Set password',
-                              ),
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/info_icon.png',
-                                    height: 15,
-                                    width: 15,
+                              title: RichText(
+                                text: const TextSpan(children: [
+                                  TextSpan(
+                                    text: 'Create account. ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 17,
+                                        color: Colors.black),
                                   ),
-                                  const Text(
-                                      '  Passwords must be at least 6 characters.'),
-                                ],
+                                  TextSpan(
+                                    text: 'New to Amazon?',
+                                    style: TextStyle(
+                                        fontSize: 13, color: Colors.black87),
+                                  )
+                                ]),
                               ),
-                              const SizedBox.square(
-                                dimension: 15,
-                              ),
-                              CustomElevatedButton(
-                                buttonText: 'Create account',
-                                onPressed: () {
-                                  if (_signUpFormKey.currentState!.validate()) {
-                                    signUpUser();
-                                  }
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-
-                // Sign In Section
-                Container(
-                  padding: const EdgeInsets.only(bottom: 10, right: 8, left: 8),
-                  decoration: BoxDecoration(
-                      color: _auth == Auth.signIn
-                          ? GlobalVariables.backgroundColor
-                          : GlobalVariables.greyBackgroundColor,
-                      borderRadius: BorderRadius.circular(6)),
-                  child: Column(
-                    children: [
-                      ListTile(
-                        minLeadingWidth: 2,
-                        leading: SizedBox.square(
-                          dimension: 12,
-                          child: Radio(
-                              value: Auth.signIn,
-                              groupValue: _auth,
-                              onChanged: (Auth? val) {
+                              onTap: () {
                                 setState(() {
-                                  _auth = val!;
+                                  _auth = Auth.signUp;
                                 });
-                              }),
-                        ),
-                        title: RichText(
-                          text: const TextSpan(children: [
-                            TextSpan(
-                              text: 'Sign in. ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.black),
+                              },
                             ),
-                            TextSpan(
-                              text: 'Already a customer?',
-                              style: TextStyle(
-                                  fontSize: 13, color: Colors.black87),
-                            ),
-                          ]),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _auth = Auth.signIn;
-                          });
-                        },
-                      ),
-                      if (_auth == Auth.signIn)
-                        Form(
-                          key: _signInFormKey,
-                          child: Column(
-                            children: [
-                              CustomTextfield(
-                                  controller: _emailController,
-                                  hintText: 'Email'),
-                              CustomTextfield(
-                                  controller: _passwordController,
-                                  hintText: 'Password'),
-                              const SizedBox.square(
-                                dimension: 6,
+                            if (_auth == Auth.signUp)
+                              Form(
+                                key: _signUpFormKey,
+                                child: Column(
+                                  children: [
+                                    CustomTextfield(
+                                      controller: _nameController,
+                                      hintText: 'First and last name',
+                                    ),
+                                    CustomTextfield(
+                                      controller: _emailController,
+                                      hintText: 'Email',
+                                    ),
+                                    CustomTextfield(
+                                      controller: _passwordController,
+                                      hintText: 'Set password',
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/info_icon.png',
+                                          height: 15,
+                                          width: 15,
+                                        ),
+                                        const Text(
+                                            '  Passwords must be at least 6 characters.'),
+                                      ],
+                                    ),
+                                    const SizedBox.square(
+                                      dimension: 15,
+                                    ),
+                                    CustomElevatedButton(
+                                      buttonText: 'Create account',
+                                      onPressed: () {
+                                        if (_signUpFormKey.currentState!
+                                            .validate()) {
+                                          isLoading = true;
+                                          setState(() {});
+
+                                          signUpUser();
+                                        }
+                                      },
+                                    )
+                                  ],
+                                ),
                               ),
-                              CustomElevatedButton(
-                                buttonText: 'Continue',
-                                onPressed: () {
-                                  if (_signInFormKey.currentState!.validate()) {
-                                    signInUser();
-                                  }
-                                },
-                              )
-                            ],
-                          ),
+                          ],
                         ),
+                      ),
+
+                      // Sign In Section
+                      Container(
+                        padding: const EdgeInsets.only(
+                            bottom: 10, right: 8, left: 8),
+                        decoration: BoxDecoration(
+                            color: _auth == Auth.signIn
+                                ? GlobalVariables.backgroundColor
+                                : GlobalVariables.greyBackgroundColor,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              minLeadingWidth: 2,
+                              leading: SizedBox.square(
+                                dimension: 12,
+                                child: Radio(
+                                    value: Auth.signIn,
+                                    groupValue: _auth,
+                                    onChanged: (Auth? val) {
+                                      setState(() {
+                                        _auth = val!;
+                                      });
+                                    }),
+                              ),
+                              title: RichText(
+                                text: const TextSpan(children: [
+                                  TextSpan(
+                                    text: 'Sign in. ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 17,
+                                        color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: 'Already a customer?',
+                                    style: TextStyle(
+                                        fontSize: 13, color: Colors.black87),
+                                  ),
+                                ]),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  _auth = Auth.signIn;
+                                });
+                              },
+                            ),
+                            if (_auth == Auth.signIn)
+                              Form(
+                                key: _signInFormKey,
+                                child: Column(
+                                  children: [
+                                    CustomTextfield(
+                                        controller: _emailController,
+                                        hintText: 'Email'),
+                                    CustomTextfield(
+                                        controller: _passwordController,
+                                        hintText: 'Password'),
+                                    const SizedBox.square(
+                                      dimension: 6,
+                                    ),
+                                    CustomElevatedButton(
+                                      buttonText: 'Continue',
+                                      onPressed: () {
+                                        if (_signInFormKey.currentState!
+                                            .validate()) {
+                                          isLoading = true;
+                                          setState(() {});
+
+                                          signInUser();
+                                        }
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox.square(
+                        dimension: 20,
+                      ),
+                      Divider(
+                        color: Colors.grey.shade300,
+                        indent: 20,
+                        endIndent: 20,
+                        thickness: 0.5,
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            customTextButton(buttonText: 'Conditions of Use'),
+                            customTextButton(buttonText: 'Privacy Notice'),
+                            customTextButton(buttonText: 'Help'),
+                          ]),
+                      const Center(
+                        child: Text(
+                          '© 1996-2023, Amazon.com, Inc. or its affiliates',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      const SizedBox.square(
+                        dimension: 20,
+                      ),
                     ],
                   ),
                 ),
-                const SizedBox.square(
-                  dimension: 20,
-                ),
-                Divider(
-                  color: Colors.grey.shade300,
-                  indent: 20,
-                  endIndent: 20,
-                  thickness: 0.5,
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      customTextButton(buttonText: 'Conditions of Use'),
-                      customTextButton(buttonText: 'Privacy Notice'),
-                      customTextButton(buttonText: 'Help'),
-                    ]),
-                const Center(
-                  child: Text(
-                    '© 1996-2023, Amazon.com, Inc. or its affiliates',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                const SizedBox.square(
-                  dimension: 20,
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 

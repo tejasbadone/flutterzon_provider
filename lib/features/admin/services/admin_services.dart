@@ -36,10 +36,13 @@ class AdminServices {
 
       List<String> imageUrls = [];
 
+      String folderName = formatFolderName(name);
+
+      String folder = 'products/$category/$folderName';
+
       for (int i = 0; i < images.length; i++) {
         CloudinaryResponse res = await cloudinary.uploadFile(
-          CloudinaryFile.fromFile(images[i].path,
-              folder: 'products/$category/$name'),
+          CloudinaryFile.fromFile(images[i].path, folder: folder),
         );
         imageUrls.add(res.secureUrl);
       }

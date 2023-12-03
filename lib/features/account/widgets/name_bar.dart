@@ -1,3 +1,4 @@
+import 'package:amazon_clone_flutter/constants/utils.dart';
 import 'package:amazon_clone_flutter/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class NameBar extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
             ),
             Text(
-              user,
+              capitalizeFirstLetter(string: user),
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ],

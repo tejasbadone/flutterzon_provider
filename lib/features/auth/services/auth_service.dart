@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:amazon_clone_flutter/constants/error_handling.dart';
 import 'package:amazon_clone_flutter/constants/global_variables.dart';
 import 'package:amazon_clone_flutter/constants/utils.dart';
+import 'package:amazon_clone_flutter/features/admin/screens/bottom_bar.dart';
+import 'package:amazon_clone_flutter/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone_flutter/models/user.dart';
 import 'package:amazon_clone_flutter/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -85,12 +87,25 @@ class AuthService {
               await prefs.setString(
                   'x-auth-token', jsonDecode(res.body)['token']);
 
+              User user =
+                  // ignore: use_build_context_synchronously
+                  Provider.of<UserProvider>(context, listen: false).user;
+
               if (context.mounted) {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, BottomBar.routeName, (route) => false);
+                if (user.type == 'admin') {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, AdminScreen.routeName, (route) => false);
+                } else if (user.type == 'user') {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, BottomBar.routeName, (route) => false);
+                } else {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, AuthScreen.routeName, (route) => false);
+                }
+
+                showSnackBar(context, 'Sign in success');
               }
             });
-        showSnackBar(context, 'Sign in success');
       }
     } catch (e) {
       if (context.mounted) {
@@ -99,7 +114,8 @@ class AuthService {
     }
   }
 
-  void getUserData(BuildContext context) async {
+  Future<User> getUserData(BuildContext context) async {
+    var userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
@@ -123,14 +139,24 @@ class AuthService {
               'x-auth-token': token
             });
         if (context.mounted) {
-          var userProvider = Provider.of<UserProvider>(context, listen: false);
           userProvider.setUser(userRes.body);
         }
       }
+      return userProvider.user;
     } catch (e) {
-      if (context.mounted) {
-        showSnackBar(context, e.toString());
-      }
+      User user = User(
+          id: '',
+          name: '',
+          email: '',
+          password: '',
+          address: '',
+          type: '',
+          token: '',
+          cart: [],
+          saveForLater: [],
+          keepShoppingFor: [],
+          wishList: []);
+      return user;
     }
   }
 }

@@ -12,7 +12,9 @@ const authRouter = express.Router();
 // Sign Up Route
 authRouter.post("/api/signup", async (req, res) => {
     try {
-        const {name, email, password} = req.body;
+        let {name, email, password} = req.body;
+
+        email = email.toLowerCase();
 
         const existingUser = await User.findOne({email});
         if(existingUser){
@@ -42,7 +44,9 @@ authRouter.post("/api/signup", async (req, res) => {
 // Sign in Route
 authRouter.post('/api/signin', async (req, res ) => {
     try {
-        const {email, password} = req.body;
+        let {email, password} = req.body;
+
+        email = email.toLowerCase();
 
         const user = await User.findOne({email});
         if(!user){

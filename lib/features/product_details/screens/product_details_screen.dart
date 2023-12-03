@@ -286,7 +286,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ? const SizedBox()
                         : Expanded(
                             child: Text(
-                              'Deliver to ${user.name} - ${user.address}',
+                              'Deliver to ${capitalizeFirstLetter(string: user.name)} - ${user.address}',
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontWeight: FontWeight.normal,

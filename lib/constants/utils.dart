@@ -36,6 +36,24 @@ void precacheAllImage(context) {
   precatchedImageMap(GlobalVariables.multiImageOffer5, context);
 }
 
+String formatFolderName(String productName) {
+  var formattedName = productName.replaceAll(' ', '-');
+
+  if (formattedName.length > 255) {
+    formattedName = formattedName.substring(0, 255);
+  }
+  formattedName = formattedName.replaceAll(RegExp(r'[^\w\-_]'), '');
+
+  return formattedName;
+}
+
+String capitalizeFirstLetter({required String string}) {
+  String firstLetter = string[0].toUpperCase();
+  String remainingString = string.substring(1, string.length);
+
+  return firstLetter + remainingString;
+}
+
 Future<List<File>> pickImages() async {
   List<File> images = [];
   try {

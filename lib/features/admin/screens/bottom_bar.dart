@@ -1,11 +1,15 @@
+import 'package:amazon_clone_flutter/constants/utils.dart';
 import 'package:amazon_clone_flutter/features/admin/screens/home_screen_admin.dart';
+import 'package:amazon_clone_flutter/features/auth/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/global_variables.dart';
 import 'analytics_screen.dart';
 import 'orders_screen.dart';
 
 class AdminScreen extends StatefulWidget {
+  static const String routeName = '/admin-screen';
   const AdminScreen({super.key});
 
   @override
@@ -48,10 +52,40 @@ class _AdminScreenState extends State<AdminScreen> {
                 alignment: Alignment.centerLeft,
                 child: Image.asset('assets/images/amazon_black_logo.png'),
               ),
-              const Text(
-                'Admin',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )
+              Row(
+                children: [
+                  const Text(
+                    'Admin',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(width: 6),
+                  IconButton(
+                      onPressed: () async {
+                        try {
+                          SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+
+                          await sharedPreferences.setString('x-auth-token', '');
+
+                          if (context.mounted) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => const AuthScreen())),
+                                (route) => false);
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            showSnackBar(context, e.toString());
+                          }
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.power_settings_new,
+                        size: 25,
+                      ))
+                ],
+              ),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:amazon_clone_flutter/constants/global_variables.dart';
+import 'package:amazon_clone_flutter/constants/utils.dart';
 import 'package:amazon_clone_flutter/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class AddressBar extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              'Deliver to ${user.name} - ${user.address}',
+              'Deliver to ${capitalizeFirstLetter(string: user.name)} - ${user.address}',
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontWeight: FontWeight.normal),
             ),

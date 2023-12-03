@@ -1,3 +1,4 @@
+import 'package:amazon_clone_flutter/constants/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/user.dart';
@@ -30,7 +31,7 @@ class ShippingAddressBlock extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
-              user.name,
+              capitalizeFirstLetter(string: user.name),
               style: textSyle.copyWith(
                 color: Colors.black87,
                 fontWeight: FontWeight.normal,

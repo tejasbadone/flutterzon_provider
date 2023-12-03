@@ -6,6 +6,7 @@ import 'package:amazon_clone_flutter/features/account/screens/your_orders.dart';
 import 'package:amazon_clone_flutter/features/address/screens/address_screen.dart';
 import 'package:amazon_clone_flutter/features/address/screens/address_screen_buy_now.dart';
 import 'package:amazon_clone_flutter/features/admin/screens/add_product_screen.dart';
+import 'package:amazon_clone_flutter/features/admin/screens/bottom_bar.dart';
 import 'package:amazon_clone_flutter/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone_flutter/features/cart/screens/cart_screen.dart';
 import 'package:amazon_clone_flutter/features/home/screens/category_deals_screen.dart';
@@ -55,6 +56,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case BrowsingHistory.routeName:
       return MaterialPageRoute(
           builder: (_) => const BrowsingHistory(), settings: routeSettings);
+
+    case AdminScreen.routeName:
+      return MaterialPageRoute(
+          builder: (_) => const AdminScreen(), settings: routeSettings);
 
     case WishListScreen.routeName:
       return MaterialPageRoute(
