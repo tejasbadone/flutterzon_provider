@@ -28,8 +28,8 @@ mongoose.connect(DB).then(()=>{
     console.log(e);
 })
 
-app.get("/" , (req, res) => {
-    res.send("this is /");
+app.get("/flutterzon" , (req, res) => {
+    res.send("Welcome to Flutterzon!");
 })
 
 app.listen(PORT, "0.0.0.0", () => {

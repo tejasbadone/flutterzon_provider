@@ -54,6 +54,7 @@ authRouter.post('/api/signin', async (req, res ) => {
             return res.status(400).json({msg : "Incorrect password!"})
         }
         
+        // passing user id obj for the payload
         const token = jwt.sign({id: user._id}, "passwordKey");
         res.json({token, ...user._doc});
 

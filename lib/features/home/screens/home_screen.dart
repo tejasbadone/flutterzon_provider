@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Limited period offers on best-selling TVs | Starting ₹8,999',
                         subTitle: 'Up to 18 months No Cost EMI',
                         image:
-                            'https://github.com/tejasbadone/flutter_amazon_clone/blob/985f77bded165c8ad0da8519cbf7e235087f3f34/assets/images/single_image_offer/single_image_offer1.jpg?raw=true',
+                            'https://res.cloudinary.com/dthljz11q/image/upload/v1699881799/single_image_offers/ulrpitq6hf4rocgo0m8w.jpg',
                         productCategory: 'Electronics',
                       ),
                       MultiImageOffer(
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         headTitle: 'Top deals on headsets',
                         subTitle: 'Up to 80% off',
                         image:
-                            'https://github.com/tejasbadone/flutter_amazon_clone/blob/985f77bded165c8ad0da8519cbf7e235087f3f34/assets/images/single_image_offer/single_image_offer2.jpg?raw=true',
+                            'https://res.cloudinary.com/dthljz11q/image/upload/v1699881798/single_image_offers/x5gqgg5ynbjkslyvefpk.jpg',
                         productCategory: 'Mobiles',
                       ),
                       MultiImageOffer(
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         headTitle: 'Buy 2 Get 10% off, freebies & more offers',
                         subTitle: 'See all offers',
                         image:
-                            'https://github.com/tejasbadone/flutter_amazon_clone/blob/985f77bded165c8ad0da8519cbf7e235087f3f34/assets/images/single_image_offer/single_image_offer.jpg?raw=true',
+                            'https://res.cloudinary.com/dthljz11q/image/upload/v1699881798/single_image_offers/u0ozqtcnhnl1eqoht85j.jpg',
                         productCategory: 'Home',
                       ),
                       MultiImageOffer(
@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         headTitle: 'Price crash | Amazon Brands & more',
                         subTitle: 'Under ₹499 | T-shirts & shirts',
                         image:
-                            'https://github.com/tejasbadone/flutter_amazon_clone/blob/985f77bded165c8ad0da8519cbf7e235087f3f34/assets/images/single_image_offer/single_image_offer3.jpeg?raw=true',
+                            'https://res.cloudinary.com/dthljz11q/image/upload/v1699881800/single_image_offers/kwfypkjyfqjsipniefav.png',
                         productCategory: 'Fashion',
                       ),
                       MultiImageOffer(
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         headTitle: 'Amazon coupons | Smartphones & accessories',
                         subTitle: 'Extra up to ₹2000 off with coupons',
                         image:
-                            'https://github.com/tejasbadone/flutter_amazon_clone/blob/985f77bded165c8ad0da8519cbf7e235087f3f34/assets/images/single_image_offer/single_image_offer4.jpg?raw=true',
+                            'https://res.cloudinary.com/dthljz11q/image/upload/v1699881799/single_image_offers/rmtbk89pmenhd3mulcus.jpg',
                         productCategory: 'Mobiles',
                       ),
                       SizedBox.square(dimension: 8)

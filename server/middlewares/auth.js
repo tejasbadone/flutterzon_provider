@@ -10,6 +10,7 @@ const auth = async (req, res , next) => {
         if(!isverified) 
             return res.status(401).json({msg: "Token verification failed, Authorization denied!"});
         
+        // extracting id from payload
         req.user = isverified.id;
         req.token = token;
 
