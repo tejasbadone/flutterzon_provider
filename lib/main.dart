@@ -5,12 +5,17 @@ import 'package:amazon_clone_flutter/providers/screen_number_provider.dart';
 import 'package:amazon_clone_flutter/providers/user_provider.dart';
 import 'package:amazon_clone_flutter/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'constants/utils.dart';
 
 Future main() async {
   await dotenv.load(fileName: "config.env");
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserProvider()),
     ChangeNotifierProvider(create: (context) => ScreenNumberProvider()),

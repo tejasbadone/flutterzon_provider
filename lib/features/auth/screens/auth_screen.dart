@@ -1,5 +1,6 @@
 import 'package:amazon_clone_flutter/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone_flutter/constants/global_variables.dart';
+import 'package:amazon_clone_flutter/constants/utils.dart';
 import 'package:amazon_clone_flutter/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -178,6 +179,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                           isLoading = true;
                                           setState(() {});
 
+                                          showSnackBar(context,
+                                              'Signing Up, please wait...');
+
                                           signUpUser();
                                         }
                                       },
@@ -256,6 +260,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                             .validate()) {
                                           isLoading = true;
                                           setState(() {});
+
+                                          showSnackBar(context,
+                                              'Signing In, please wait...');
 
                                           signInUser();
                                         }
