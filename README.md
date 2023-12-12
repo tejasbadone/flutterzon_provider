@@ -128,6 +128,8 @@ Flutterzon is a purpose-driven initiative, with the primary goal of creating an 
 
   ![Admin](https://res.cloudinary.com/dthljz11q/image/upload/v1701802450/app%20screenshots/db8l8zwbbm7dtczsjquc.png)
 
+- **Video Link** - [https://drive.google.com/uc?id=1fjZSYIpgDcpcgAc-hevb39RrpyiNLYQm](https://drive.google.com/uc?id=1fjZSYIpgDcpcgAc-hevb39RrpyiNLYQm)
+
 ## Run Locally
 
 - Clone this repository
@@ -155,6 +157,7 @@ Flutterzon is a purpose-driven initiative, with the primary goal of creating an 
   OR
   npm start (to run index.js)
   ```
+  Please star⭐ the repo if you like what you see😉.
 
 ## Download
 
@@ -180,6 +183,96 @@ Download apk - https://drive.google.com/file/d/1OMU5eH89QozO9HeOkKx5USPV36qDHFLU
 - Please be aware that the application or APIs might experience delays in providing details, as the server is hosted on a hobby plan, If there is no activity for 15 minutes, the server may go to sleep, resulting in a delay in processing the first API request. Your patience during this process is greatly appreciated.
 
 - If you are interested, there is another version of this project built using BLOC, which is an advanced version of this project. You can access it [here](https://github.com/tejasbadone/flutterzon_bloc).
+
+- Special thanks to [Rivaan Ranawat](https://github.com/RivaanRanawat) for his Amazon clone tutorial and below is the feature list that I have added to my version of the app.
+
+  **My version of the Amazon clone includes significant UI changes inspired by the actual Amazon application**
+
+  **Admin Section:**
+
+  - Modified the UI to resemble the original login screen of Amazon closely.
+
+  **Bottom Bar:**
+
+  - Implemented Amazon Ember font.
+  - Added more tabs with Amazon-like bottom nav bar icons.
+  - Enabled seamless redirection at sign-in(admin/user) without restarting the app.
+
+  **Home Screen:**
+
+  - Expanded to 9 categories, each with over 10 products.
+  - Address bar displays only when user address is available.
+  - Carousel offers links to respective category products.
+  - Bottom offers provide quick access to specific categories.
+  - "Deal of the Day" showcases the most-rated product.
+  - Dynamic display of four image offers, admin can manage them.
+
+  **Account:**
+
+  - Enhanced top buttons with gradient background.
+  - Introduced "My Orders" screen with search functionality for orders.
+  - Integrated "Keep Shopping" and "Wish List" features with dedicated pages and dedicated widgets.
+  - Add to the cart directly from the wish list.
+  - Remove products from the wish list.
+
+  **Order Details:**
+
+  - Shows multiple ordered products.
+  - Real-time product rating on the order details page.
+  - Displays payment information, shipping address, and order summary.
+  - Custom product recommendations based on the ordered product categories.
+  - Added order tracking updates screen and a custom bottom sheet to see the order status.
+
+  **Cart Screen:**
+
+  - Introduced the "Save for Later" feature.
+  - Implemented a swipeable feature for products in the cart and "Save for Later" list. Swipe right to delete and left to save for later/ move to the cart.
+  - Implemented delete, save for later, and "See More Like This" features for cart products.
+  - Implemented delete, compare, and move-to-cart features for products saved for later.
+  - The "See More Like This" and "Compare" features display relevant products in a custom bottom sheet.
+  - Implemented custom product recommendations based on browsing history. The feature displays three lists of products from different categories. If the user has a browsing history, categories are fetched from it. In the absence of browsing history, the feature shows random category products until the history populates with products.
+
+  **Menu Screen:**
+
+  - Added a menu screen displaying categories and respective images from a static JSON.
+  - Added a bottom sheet to the menu screen containing buttons for orders, history, account, and wishlist. Each button redirects to its respective screen.
+
+  **More Screen:**
+
+  - Implemented a "More" screen/widget in the bottom bar, providing access to a static bottom sheet page featuring Amazon Pay and Amazon Prime.
+  - Opens the camera when clicking on "Scan any QR to pay."
+
+  **Category Screen:**
+
+  - Custom widget for displaying products in the category screen.
+  - Delivery date displayed within the next 15-day window.
+
+  **Product Details:**
+
+  - Dynamic wishlist icon.
+  - Real-time addition and removal from the wish list.
+  - Upgraded UI and Added a feature to display the EMI amount based on the price of the product.
+  - Implemented the "Buy Now" feature with a separate page for ordering the product.
+  - Displays customer ratings and user ratings. User ratings are shown only if the user has already ordered that product.
+  - Updates the product rating in real-time only if the user has already ordered that product.
+  - Custom product recommendations at the end of the page.
+
+  **Payment Screen:**
+
+  - Implemented separate screens for "Buy Now" and purchasing from the cart.
+  - Custom grey Google Pay button until the user fills in address details.
+  - The grey Google Pay button is visible only when the user's address details are not available in the database.
+
+  **Admin Section:**
+
+  - Upgraded UI and added a logout feature.
+  - Category-wise product view.
+  - Implemented a "Replace Images" feature in the "Add Product" screen, available after selecting the images for the product.
+  - Save product images in folders categorized by product and category in Cloudinary.
+  - Implemented the Syncfusion Flutter Charts package to visualize category-based earnings in a graph.
+  - The graph consistently reflects three times the total earnings.
+  - Added an "Offers" screen for managing(Adding/Removing) four image offers.
+  - Updated UI in the order screen to update the order status.
 
 ## Disclaimer
 
